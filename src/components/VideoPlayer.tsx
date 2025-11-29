@@ -170,9 +170,15 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
 
   if (!videoUrl) {
     return (
-      <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-4 bg-card border border-border rounded-lg">
-        <Upload className="w-16 h-16 text-muted-foreground opacity-50" />
-        <p className="text-muted-foreground text-lg">Upload a video to get started</p>
+      <div className="flex flex-col items-center justify-center h-full min-h-[500px] gap-4 bg-gradient-to-br from-card via-card to-card/50 border border-border rounded-xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-mesh opacity-50"></div>
+        <div className="relative z-10 text-center space-y-3">
+          <div className="w-24 h-24 mx-auto rounded-full bg-gradient-primary flex items-center justify-center shadow-glow-strong animate-pulse">
+            <Upload className="w-12 h-12 text-primary-foreground" />
+          </div>
+          <p className="text-foreground text-xl font-semibold">No Video Loaded</p>
+          <p className="text-muted-foreground">Use the controls below to test the speed settings</p>
+        </div>
       </div>
     );
   }

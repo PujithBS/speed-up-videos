@@ -42,10 +42,33 @@ All colors MUST be HSL.
     --glass-border: 210 40% 98% / 0.1;
     
     --gradient-primary: linear-gradient(135deg, hsl(189 94% 55%), hsl(220 94% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(280 94% 55%), hsl(320 94% 65%));
     --gradient-overlay: linear-gradient(180deg, hsl(220 18% 8% / 0), hsl(220 18% 8% / 0.8));
+    --gradient-mesh: radial-gradient(at 20% 30%, hsl(189 94% 35% / 0.3) 0px, transparent 50%),
+                      radial-gradient(at 80% 70%, hsl(280 94% 35% / 0.3) 0px, transparent 50%);
     
     --shadow-glow: 0 0 40px hsl(189 94% 55% / 0.3);
+    --shadow-glow-strong: 0 0 60px hsl(189 94% 55% / 0.5), 0 0 100px hsl(189 94% 55% / 0.3);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(189 94% 55% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(189 94% 55% / 0.6);
+    }
+  }
+  
+  .bg-mesh {
+    background-image: var(--gradient-mesh);
   }
 }
 
