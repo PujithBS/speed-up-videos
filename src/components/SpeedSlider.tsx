@@ -32,13 +32,36 @@ export const SpeedSlider = ({ speed, onSpeedChange }: SpeedSliderProps) => {
     return "Extreme";
   };
 
+  const getGlowIntensity = (speed: number) => {
+    // Normalize speed to 0-1 range (0.25 to 12)
+    const normalized = (speed - SPEED_MIN) / (SPEED_MAX - SPEED_MIN);
+    const intensity = Math.min(normalized * 1.5, 1); // Cap at 1 for max glow
+    
+    return {
+      blur: `${20 + intensity * 40}px`,
+      opacity: 0.3 + intensity * 0.5,
+    };
+  };
+
   return (
     <div className="relative">
       {/* Main Speed Display */}
       <div className="flex items-center justify-center mb-8">
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-primary blur-3xl opacity-50 animate-pulse-glow"></div>
-          <div className="relative bg-card/50 backdrop-blur-xl border-2 border-primary/30 rounded-3xl px-12 py-8 shadow-glow-strong">
+          <div 
+            className="absolute inset-0 bg-gradient-primary animate-pulse-glow transition-all duration-500"
+            style={{
+              filter: `blur(${getGlowIntensity(speed).blur})`,
+              opacity: getGlowIntensity(speed).opacity,
+            }}
+          ></div>
+          <div 
+            className="relative bg-card/50 backdrop-blur-xl border-2 rounded-3xl px-12 py-8 transition-all duration-500"
+            style={{
+              borderColor: `hsl(189 94% 55% / ${0.2 + getGlowIntensity(speed).opacity * 0.5})`,
+              boxShadow: `0 0 ${30 + getGlowIntensity(speed).opacity * 60}px hsl(189 94% 55% / ${getGlowIntensity(speed).opacity}), 0 0 ${60 + getGlowIntensity(speed).opacity * 100}px hsl(189 94% 55% / ${getGlowIntensity(speed).opacity * 0.6})`,
+            }}
+          >
             <div className="flex items-center gap-4">
               <Zap className={cn("w-12 h-12", getSpeedColor(speed))} />
               <div>
