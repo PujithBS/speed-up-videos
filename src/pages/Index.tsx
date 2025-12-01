@@ -7,16 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Gauge, Sparkles, Zap, Clock, Settings } from "lucide-react";
 
 const Index = () => {
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setVideoUrl(url);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -46,19 +37,6 @@ const Index = () => {
               </div>
             </div>
 
-            <input
-              type="file"
-              id="video-upload"
-              accept="video/*"
-              onChange={handleFileInput}
-              className="hidden"
-            />
-            <Button
-              onClick={() => document.getElementById('video-upload')?.click()}
-              className="bg-gradient-primary hover:opacity-90 transition-opacity shadow-glow"
-            >
-              Load Video
-            </Button>
           </div>
         </div>
       </header>
@@ -68,7 +46,7 @@ const Index = () => {
         <div className="grid lg:grid-cols-[1fr_380px] gap-8">
           {/* Video Section */}
           <div className="space-y-6">
-            <VideoPlayer videoUrl={videoUrl} />
+            <VideoPlayer videoUrl={null} />
 
             {/* Speed Control Card */}
             <Card className="p-8 bg-card/50 backdrop-blur-xl border-border/50 shadow-xl relative overflow-hidden">
